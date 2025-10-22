@@ -4,6 +4,7 @@ const db = require('../config/db');
 const userController = require('../controllers/userController');
 const middleware = require('../middleware/middleware');
 const multer = require('multer');
+
 const path = require('path');
 const reactuserController = require('../controllers/reactUserController');
 
@@ -29,6 +30,6 @@ router.post('/upload', middleware, upload.single("file"), userController.insertU
 router.post('/sendMail', userController.sendMail);
 
 /*New Routes*/
-router.post('/react-signup', reactuserController.addUser)
+router.post('/reactsignup',upload.single('profilephoto'), reactuserController.addUser)
 /**/
 module.exports = router;
