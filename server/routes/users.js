@@ -9,6 +9,7 @@ const path = require('path');
 const reactuserController = require('../controllers/reactUserController');
 
 
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "public/uploads/")
@@ -17,6 +18,7 @@ const storage = multer.diskStorage({
         cb(null, Date.now() + path.extname(file.originalname));
     }
 });
+
 const upload = multer({ storage });
 
 router.get('/', userController.getuserInfo);
@@ -31,5 +33,6 @@ router.post('/sendMail', userController.sendMail);
 
 /*New Routes*/
 router.post('/reactsignup',upload.single('profilephoto'), reactuserController.addUser)
+router.get('/getallusers',reactuserController.getUsers)
 /**/
 module.exports = router;

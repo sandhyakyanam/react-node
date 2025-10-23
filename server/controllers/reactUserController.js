@@ -30,4 +30,27 @@ async function addUser(req, res) {
     }
    
 }
-module.exports = { addUser }
+async function getUsers(req, res) {
+
+    try {
+        const getuserdata = await userModel.getAllUserInfo();
+        if (getuserdata) {
+            res.status(200).json({
+                message: 'User Data Found',
+                data : getuserdata
+            })
+        } else {
+            res.status(500).json({
+                message: 'User Data Not Found'
+            })
+        }
+        
+    } catch (err) {
+        req.status(500).json({
+            messgae: 'No User Data Found',
+            err: err.message
+        })
+    }
+}
+
+module.exports = { addUser, getUsers}
