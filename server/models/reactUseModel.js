@@ -11,4 +11,12 @@ async function insertUser(requestdata)
         throw err;
     }
 }
-module.exports = {insertUser}
+async function getAllUserInfo() {
+   try {
+      const [rows] = await db.query("SELECT * FROM users");
+      return rows;
+    } catch (err) {
+        throw err;
+    }
+}
+module.exports = {insertUser, getAllUserInfo}

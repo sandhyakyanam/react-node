@@ -1,14 +1,14 @@
-import { useState } from 'react'
-import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './Home';
+import Login from './Login';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import SignUp from './SignUp'
 
 function App() {
-
   return (
     <BrowserRouter>
        <Routes>
-          <Route path='/' element={<Home />}></Route>
+          <Route path='/' element={<Login />}></Route>
+          <Route path='/signup' element={<SignUp />}></Route>
        </Routes>
     </BrowserRouter>
   )
