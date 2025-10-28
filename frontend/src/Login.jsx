@@ -14,15 +14,15 @@ export default function Login() {
       .required("Password is required")
       .min(6, "Password must be at least 6 characters"),
   });
-    let initalValues = {
-        email : ' ',
-        password : ''
-    }
+  
+  let initalValues = {
+      email : ' ',
+      password : ''
+  }
 
-
-    let handleSubmit = (values) => {
-        console.log("Form data:", values);
-    }
+  let handleSubmit = (values) => {
+      console.log("Form data:", values);
+  }
   
 
   return (
@@ -33,7 +33,7 @@ export default function Login() {
             <Form>
                 <div className="mb-3">
                     <label htmlFor="email">
-                    <   strong>Email</strong>
+                    <strong>Email</strong>
                     </label>
                     <Field
                     type="email"

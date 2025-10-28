@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import axios  from "axios";
 
 export default function SignUp() {
   const validationSchema = Yup.object().shape({
@@ -29,6 +30,8 @@ export default function SignUp() {
     confirmpassword: Yup.string()
       .required("Confirm password is required")
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
+    status : Yup.string()
+            .required("Status is required"),
   });
 
   const initialValues = {
@@ -39,10 +42,25 @@ export default function SignUp() {
     profilephoto: null,
     password: "",
     confirmpassword: "",
+    status : ""
   };
 
   const handleSubmit = (values) => {
-    console.log("Form data:", values);
+      axios.post("http://localhost:3003/user/reactsignup",{
+          firstname : values.firstname,
+          lastname : values.secondname,
+          phonenumber: values.phonenumber,
+          profilephoto : values.profilephoto,
+          status : values.status,
+          email : values.email
+      },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then(res=>console.log(res))
+      .catch(err=>console.log(err))
   };
 
   return (
@@ -120,6 +138,7 @@ export default function SignUp() {
                 <input
                   type="file"
                   className="form-control rounded-0"
+                  
                   onChange={(event) =>
                     setFieldValue("profilephoto", event.currentTarget.files[0])
                   }
@@ -156,6 +175,26 @@ export default function SignUp() {
                 />
                 <ErrorMessage
                   name="confirmpassword"
+                  component="div"
+                  className="text-danger small"
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="status" className="form-label">
+                  <strong>Status</strong>
+                </label>
+                <Field
+                  as="select"
+                  id="status"
+                  name="status"
+                  className="form-control rounded-0"
+                >
+                  <option>Please select the status</option>
+                  <option value="1">Active</option>
+                  <option value="0">Inactive</option>
+                </Field>
+                <ErrorMessage
+                  name="status"
                   component="div"
                   className="text-danger small"
                 />
