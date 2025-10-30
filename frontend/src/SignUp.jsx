@@ -2,8 +2,11 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios  from "axios";
+import { useNavigate} from "react-router-dom";
+
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const validationSchema = Yup.object().shape({
     firstname: Yup.string()
       .required("First name is required")
@@ -59,7 +62,12 @@ export default function SignUp() {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then(res=>console.log(res))
+      .then((res)=>{
+        if(res.status == 200)
+        {
+          navigate('/dashboard');
+        }
+      })
       .catch(err=>console.log(err))
   };
 
