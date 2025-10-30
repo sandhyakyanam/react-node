@@ -6,6 +6,7 @@ var logger = require('morgan');
 const cors = require('cors');
 var usersRouter = require('./routes/users');
 
+
 var app = express();
 
 // view engine setup
@@ -21,8 +22,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static('public'));
+app.use('/imagepath', express.static(path.join(__dirname, 'public/uploads')));
+console.log(__dirname);
 
 app.use("/user", usersRouter);
 
