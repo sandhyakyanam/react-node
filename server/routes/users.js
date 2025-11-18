@@ -34,5 +34,7 @@ router.post('/sendMail', userController.sendMail);
 /*New Routes*/
 router.post('/reactsignup',upload.single('profilephoto'), reactuserController.addUser)
 router.get('/getallusers',reactuserController.getUsers)
+router.post('/edituser/:id',upload.single('profilephoto'),reactuserController.editUser)
+
 /**/
 module.exports = router;

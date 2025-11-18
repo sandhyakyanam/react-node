@@ -52,5 +52,36 @@ async function getUsers(req, res) {
         })
     }
 }
+async function editUser(req,res)
+{
+    try{
+       const userid = req.params.id;
 
-module.exports = { addUser, getUsers}
+       if(userid)
+       {
+          checkUserExists = await userModel.checkUserExists(userid);
+          if(checkUserExists[0].id)
+          {
+            let userdata = {
+                firstname : req.body.firstname,
+                lastname : req.body.lastname,
+                email : req.body.email,
+                phonenumber : req.body.phonenumber,
+                profilephoto : req.file.filename,
+                password : req.body.password,
+                status : req.body.status,
+                id : userid
+            }
+            editData = await userModel.editUserData(userdata); 
+          }
+       }
+
+    }
+    catch (err){
+      res.status(500).json({
+        message : 'Something went wrong',
+        err : err.message
+      })
+    }
+}
+module.exports = { addUser, getUsers, editUser}
