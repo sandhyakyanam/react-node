@@ -32,7 +32,7 @@ export default function Dashboard() {
                 return (
                   <tr key={index}>
 
-                    <td><Link to='/EditProfile'>{user.firstname}</Link></td>
+                    <td><Link to={`/EditProfile/${user.id}/${user.lastname}`}>{user.firstname}</Link></td>
                     <td>{user.lastname}</td>
                     <td>{user.email}</td>
                     <td>{user.phonenumber}</td>
